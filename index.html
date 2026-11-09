@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CinéTrack</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col font-sans">
+
+  <header class="bg-gray-800 border-b border-gray-700 py-4 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <h1 class="text-2xl font-bold text-white tracking-wide">
+        Ciné<span class="text-red-500">Track</span>
+      </h1>
+      
+      <div class="flex-1 max-w-sm">
+        <input 
+          type="text" 
+          id="search-input" 
+          placeholder="Rechercher un film ou une série..." 
+          class="w-full bg-gray-900 border border-gray-600 rounded px-3 py-1.5 text-sm text-white placeholder-gray-400 focus:outline-none focus:border-red-500"
+        />
+      </div>
+
+      <button 
+        id="toggle-favorites-btn" 
+        class="lg:hidden text-sm bg-gray-700 hover:bg-gray-600 px-3 py-1.5 rounded text-white flex items-center justify-between"
+      >
+        <span>Favoris</span>
+        <span id="mobile-fav-count" class="ml-2 bg-red-600 text-xs px-2 py-0.5 rounded-full font-bold">0</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="max-w-6xl mx-auto px-4 py-6 flex-1 w-full flex flex-col lg:flex-row gap-6">
+
+    <main class="flex-1 min-w-0">
+      
+      <div class="flex items-center justify-start mb-4">
+        <div class="flex gap-2" id="filter-buttons">
+          <button data-type="all" class="filter-btn px-3 py-1 text-sm rounded bg-red-600 text-white font-medium">
+            Tous
+          </button>
+          <button data-type="movie" class="filter-btn px-3 py-1 text-sm rounded bg-gray-800 hover:bg-gray-700 text-gray-300 font-medium">
+            Films
+          </button>
+          <button data-type="series" class="filter-btn px-3 py-1 text-sm rounded bg-gray-800 hover:bg-gray-700 text-gray-300 font-medium">
+            Séries
+          </button>
+        </div>
+      </div>
+
+      <div id="status-message" class="hidden text-center py-12"></div>
+
+      <div id="items-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
+
+      <div id="pagination-container" class="mt-6 pt-4 border-t border-gray-800 flex items-center justify-between">
+        <span class="text-xs text-gray-400">
+          Page <span id="current-page-num" class="font-bold text-white">1</span> sur <span id="total-pages-num" class="font-bold text-white">1</span>
+        </span>
+        <div id="pagination-buttons" class="flex gap-1"></div>
+      </div>
+
+    </main>
+
+    <aside 
+      id="favorites-sidebar" 
+      class="fixed inset-y-0 right-0 z-50 w-72 bg-gray-800 p-4 border-l border-gray-700 flex flex-col transition-transform duration-200 transform translate-x-full lg:translate-x-0 lg:static lg:inset-auto lg:rounded lg:border lg:w-72 shrink-0"
+    >
+      <div class="flex items-center justify-between pb-2 border-b border-gray-700">
+        <h2 class="font-bold text-sm text-white uppercase tracking-wider">Favoris</h2>
+        <button id="close-sidebar-btn" class="lg:hidden text-gray-400 hover:text-white text-lg">
+          &times;
+        </button>
+      </div>
+
+      <div id="favorites-list" class="flex-1 overflow-y-auto space-y-2 py-3"></div>
+    </aside>
+
+  </div>
+
+  <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/50 z-40 lg:hidden"></div>
+
+  <div id="detail-modal" class="hidden fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+    <div id="modal-container" class="bg-gray-800 border border-gray-700 rounded-lg max-w-lg w-full overflow-hidden relative shadow-lg"></div>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
